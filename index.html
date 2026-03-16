@@ -1,10 +1,13 @@
 <!DOCTYPE html>
+<!-- HTML structure for Remote Data List app -->
 <html lang="en">
 <head>
+    <!-- Meta tags for character encoding and responsive design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remote Data List | Sandra Lawal | 76870</title>
 
+    <!-- Embedded CSS styles for the page layout and appearance -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -102,22 +105,29 @@
     </style>
 </head>
 <body>
-
+    <!-- Page header with title and description -->
     <h1>Load Remote Data</h1>
     <p>Click the buttons below to load data from remote APIs.</p>
 
+    <!-- Container for action buttons -->
     <div id="button-container">
         <button class="btn" id="btn-countries">Load Countries</button>
         <button class="btn" id="btn-users">Load Users</button>
         <button class="btn" id="btn-rick-grid">Rick and Morty</button>
     </div>
 
+    <!-- Dynamic controls container for region selection or search inputs -->
     <div id="dynamic-controls"></div>
 
+    <!-- Container for displaying fetched remote data -->
     <div id="remote-data-container"></div>
 
+    <!-- Embedded JavaScript for handling API calls and UI interactions -->
     <script>
         // ===================== SHOW CONTROLS =====================
+        // Functions to display dynamic controls based on selected data type
+
+        // Displays region selection controls for countries
         function showCountriesControls() {
             const controls = document.getElementById("dynamic-controls");
             controls.innerHTML = `
@@ -135,6 +145,7 @@
             document.getElementById("load-region-btn").addEventListener("click", fetchCountriesData);
         }
 
+        // Displays search input controls for Rick and Morty characters
         function showRickControls() {
             const controls = document.getElementById("dynamic-controls");
             controls.innerHTML = `
@@ -152,11 +163,15 @@
             });
         }
 
+        // Clears the dynamic controls container
         function clearControls() {
             document.getElementById("dynamic-controls").innerHTML = "";
         }
 
         // ===================== COUNTRIES =====================
+        // Functions for fetching and displaying countries data from REST Countries API
+
+        // Fetches countries data based on selected region
         async function fetchCountriesData() {
             const container = document.getElementById("remote-data-container");
             const region = document.getElementById("region-select").value;
@@ -180,6 +195,7 @@
             }
         }
 
+        // Renders the fetched countries data into HTML cards
         function displayCountriesData(countriesArray) {
             const container = document.getElementById("remote-data-container");
             let htmlOutput = "";
@@ -206,6 +222,9 @@
         }
 
         // ===================== USERS =====================
+        // Functions for fetching and displaying users data from JSONPlaceholder API
+
+        // Fetches users data from the API
         async function fetchUsersData() {
             const container = document.getElementById("remote-data-container");
             container.innerHTML = '<p class="info-message">Loading users...</p>';
@@ -227,6 +246,7 @@
             }
         }
 
+        // Renders the fetched users data into HTML cards
         function displayUsersData(usersArray) {
             const container = document.getElementById("remote-data-container");
             let htmlOutput = "";
@@ -248,6 +268,9 @@
         }
 
         // ===================== RICK AND MORTY =====================
+        // Functions for fetching and displaying Rick and Morty characters from the API
+
+        // Fetches characters data, optionally filtered by name
         async function fetchRickAndMortyData() {
             const container = document.getElementById("remote-data-container");
             const characterInput = document.getElementById("character-search");
@@ -283,6 +306,7 @@
             }
         }
 
+        // Renders the fetched characters data into HTML cards
         function displayRickAndMortyData(charactersArray) {
             const container = document.getElementById("remote-data-container");
             let htmlOutput = "";
@@ -304,16 +328,21 @@
         }
 
         // ===================== BUTTON EVENTS =====================
+        // Event listeners for the main action buttons
+
+        // Event listener for countries button - shows controls and clears data
         document.getElementById("btn-countries").addEventListener("click", function() {
             showCountriesControls();
             document.getElementById("remote-data-container").innerHTML = "";
         });
 
+        // Event listener for users button - clears controls and fetches users data
         document.getElementById("btn-users").addEventListener("click", function() {
             clearControls();
             fetchUsersData();
         });
 
+        // Event listener for Rick and Morty button - shows controls and clears data
         document.getElementById("btn-rick-grid").addEventListener("click", function() {
             showRickControls();
             document.getElementById("remote-data-container").innerHTML = "";
